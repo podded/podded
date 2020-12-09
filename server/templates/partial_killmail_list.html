@@ -1,0 +1,59 @@
+<div class="container pt-3 pb-3">
+    <ul class="list-group">
+        <li class="list-group-item">
+            <div class="container row">
+                <div class="col-sm-1">
+                    Time
+                </div>
+                <div class="col-sm-1">
+
+                </div>
+                <div class="col-sm-2">
+                    Location
+                </div>
+                <div class="col-sm-1">
+
+                </div>
+                <div class="col-sm-2">
+                    Victim
+                </div>
+                <div class="col-sm">
+                   Info
+                </div>
+            </div>
+        </li>
+        {{ range .mails }}
+        <li class="list-group-item">
+            <div class="container row">
+                <div class="col-sm-1">
+                    <p class="p-0 m-0">{{.Killmail.KillmailTime.Format "15:04:05"}}</p>
+                    <p class="p-0 m-0">{{.Killmail.KillmailTime.Format "Jan-02-06"}}</p>
+                </div>
+                <div class="col-sm-1">
+                    <a href="/kill/{{.ID}}">
+                        <img src="https://images.evetech.net/types/{{.Killmail.Victim.ShipTypeID}}/render?size=64"
+                             style="height: 48px; width: 48px; border-radius: 5px; vertical-align: middle; background-color: #939393; overflow: hidden">
+                    </a>
+                </div>
+                <div class="col-sm-2">
+                    <a href="/system/{{.Killmail.SolarSystemID}}"><p class="p-0 m-0">{{.Killmail.SolarSystemID}}</p></a>
+                    {{if .Killmail.RegionID}}<a href="/region/{{.Killmail.RegionID}}"><p class="p-0 m-0">{{.Killmail.RegionID}}</p></a>{{end}}
+                </div>
+                <div class="col-sm-1">
+                    <img src="https://images.evetech.net/corporations/{{.Killmail.Victim.CorporationID}}/logo?size=64"
+                         style="height: 48px; width: 48px; border-radius: 5px; vertical-align: middle; background-color: #939393; overflow: hidden">
+                </div>
+                <div class="col-sm-2">
+                    <p class="p-0 m-0"><a href="/character/{{.Killmail.Victim.CharacterID}}">{{.Killmail.Victim.CharacterID}}</a>
+                    </p>
+                    <p class="p-0 m-0"><a href="/corporation/{{.Killmail.Victim.CorporationID}}">{{.Killmail.Victim.CorporationID}}</a></p>
+                </div>
+                <div class="col-sm">
+                    <p class="p-0 m-0">Invloved: {{len .Killmail.Attackers}}</p>
+                    <p class="p-0 m-0">Flags: 0</p>
+                </div>
+            </div>
+        </li>
+        {{end}}
+    </ul>
+</div>

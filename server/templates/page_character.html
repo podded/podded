@@ -1,0 +1,92 @@
+<!--page_index.html-->
+
+<!--Embed the partial_header.html template at this location-->
+{{ template "partial_header.html" .}}
+
+<!--Character Card-->
+
+<div class="container bg-light">
+    <div class="accordion p-3" id="charcard">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="cardheading">
+                <button class="accordion-button text-dark" type="button" style="background-color: #ff7300"
+                        data-toggle="collapse" data-target="#charcontent">
+                    Character Card
+                </button>
+            </h2>
+            <div id="charcontent" class="accordion-collapse collapse show" aria-labelledby="cardheading"
+                 data-parent="#charcard">
+                <div class="accordion-body">
+                    <div class="container row">
+                        <div class="col-sm-auto">
+                            <img src="https://images.evetech.net/characters/{{.charid}}/portrait?size=256"
+                                 style="height: 256px; width: 256px; border-radius: 15px; vertical-align: middle; background-color: #939393; overflow: hidden">
+                        </div>
+
+                        <div class="col-sm">
+                            <p>Character Name</p>
+                            <p>Corporation Name</p>
+                            <p>Alliance Name</p>
+                            <p>Faction Name</p>
+                            <p>Biography - Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                                nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                                irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                                pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                                deserunt mollit anim id est laborum.</p>
+                        </div>
+                        <div class="col-sm-3">
+                            <table>
+                                <thead>
+                                    <td></td>
+                                    <td class="pl-3">Count</td>
+                                    <td class="pl-3">Tonnage</td>
+                                </thead>
+                                <tr>
+                                    <td class="pr-3">Kills</td>
+                                    <td>1095</td>
+                                    <td>1.5b</td>
+                                </tr>
+                                <tr>
+                                    <td class="pr-3">Losses</td>
+                                    <td>1095</td>
+                                    <td>1.5b</td>
+                                </tr>
+
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Stats-->
+
+<div class="container bg-light">
+    <div class="accordion p-3" id="stats">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="statsheading">
+                <button class="accordion-button" type="button" data-toggle="collapse" data-target="#statcontent">
+                    Top Stats
+                </button>
+            </h2>
+            <div id="statcontent" class="accordion-collapse collapse show" aria-labelledby="statsheading"
+                 data-parent="#stats">
+                <div class="accordion-body">
+                    <strong>This box will contain some basic stats on the character for the past 7d rolling</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Killmails-->
+<div class="container bg-light">
+    {{ template "partial_killmail_list.html" .}}
+</div>
+
+<!--Embed the partial_footer.html template at this location-->
+{{ template "partial_footer.html" .}}

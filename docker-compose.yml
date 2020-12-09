@@ -1,0 +1,96 @@
+version: "3.2"
+
+services:
+
+  mariadb:
+    image: mariadb:10.5-bionic
+    container_name: mariadb
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MARIA_PASS}
+      MYSQL_USER: ${MARIA_USER}
+      MYSQL_PASSWORD: ${MARIA_PASS}
+      MYSQL_DATABASE: ${MARIA_DATABASE}
+    volumes:
+      - "mariadb-data:/var/lib/mysql"
+    ports:
+      - "3306:3306"
+    #    networks:
+    #      - podded-network
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10Mb"
+        max-file: "5"
+
+  redis:
+    image: redis:6-alpine
+    container_name: redis
+    command: redis-server --appendonly no
+    restart: always
+    volumes:
+      - "redis-data:/data"
+    ports:
+      - "6379:6379"
+    #    networks:
+    #      - podded-network
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10Mb"
+        max-file: "5"
+
+  mongo:
+    image: mongo:4.4-bionic
+    restart: always
+    volumes:
+      - "mongo-data:/data/db"
+    ports:
+      - "27017-27019:27017-27019"
+    #    networks:
+    #      - podded-network
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10Mb"
+        max-file: "5"
+
+
+  memcached:
+    image: memcached:1.6-alpine
+    ports:
+      - 11211:11211
+    command: ["-m", "1024m"]
+    restart: unless-stopped
+
+
+  redis-commander:
+    container_name: redis-commander
+    hostname: redis-commander
+    image: rediscommander/redis-commander
+    restart: unless-stopped
+    environment:
+      - REDIS_HOSTS=local:redis:6379
+    ports:
+      - 8081:8081
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10Mb"
+        max-file: "5"
+
+  bouncer:
+    container_name: bouncer
+    restart: unless-stopped
+    hostname: bouncer
+    image: podded/bouncer
+    ports:
+    - 13271:13271
+    - 8888:8888
+    environment:
+      - BOUNCER_RATE_LIMIT=250
+
+volumes:
+  redis-data:
+  mariadb-data:
+  mongo-data:

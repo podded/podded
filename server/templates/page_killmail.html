@@ -1,0 +1,32 @@
+<!--page_index.html-->
+
+<!--Embed the partial_header.html template at this location-->
+{{ template "partial_header.html" .}}
+
+<!--Stats-->
+
+<div class="container bg-light">
+    <div class="accordion" id="stats">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="statsheading">
+                <button class="accordion-button" type="button" data-toggle="collapse" data-target="#statcontent">
+                    Top Stats
+                </button>
+            </h2>
+            <div id="statcontent" class="accordion-collapse collapse show" aria-labelledby="statsheading"
+                 data-parent="#stats">
+                <div class="accordion-body">
+                    <strong>This box will contain some basic stats on top chars etc for the past 7d rolling</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Killmails-->
+<div class="container bg-light">
+    {{ .mail }}
+</div>
+
+<!--Embed the partial_footer.html template at this location-->
+{{ template "partial_footer.html" .}}
